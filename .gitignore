@@ -9,4 +9,4 @@ export_presets.cfg
 data_*/
 
 # Project-specific ignores
-# eeh
+lobby/*.ttf
