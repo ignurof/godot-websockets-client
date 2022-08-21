@@ -13,10 +13,11 @@ func _ready():
     
     
 func _on_joined_server() -> void:
+    add_child(map.instance())
     lobby.hide()
     transition.get_node("AnimationPlayer").play("transit")
     transition.show()
     yield(get_tree().create_timer(2.0), "timeout")
     transition.hide()
     transition.get_node("AnimationPlayer").stop()
-    add_child(map.instance())
+    

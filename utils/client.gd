@@ -2,6 +2,9 @@ extends Node
 # Autoload Singleton that can be used for everything websocket client related
 
 signal joined_server
+signal spawn_local_player
+signal spawn_new_player
+signal spawn_network_players
 
 var uuid: String = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 var _connected: bool = false
@@ -47,11 +50,18 @@ func _on_data_received() -> void:
             
 
 func _handle_incoming_data(data: Dictionary) -> void:
+    printt("_handle_incoming_data", data)
     match data.cmd:
         "joined_server":
             printt(data.content.msg, data.content.uuid)
             uuid = data.content.uuid
             emit_signal("joined_server")
+        "spawn_local_player":
+            emit_signal("spawn_local_player", data.content.player)
+        "spawn_new_player":
+            emit_signal("spawn_new_player", data.content.player)
+        "spawn_network_players":
+            emit_signal("spawn_network_players", data.content.players)
         _:
             push_error("_handle_incoming_data ERROR!!")
 
