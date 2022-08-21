@@ -41,3 +41,5 @@ shape = SubResource( 1 )
 
 [node name="SpawnPos" type="Position2D" parent="."]
 position = Vector2( 620, 300 )
+
+[node name="PlayerList" type="Node2D" parent="."]
