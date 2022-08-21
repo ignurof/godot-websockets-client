@@ -5,6 +5,7 @@ signal joined_server
 signal spawn_local_player
 signal spawn_new_player
 signal spawn_network_players
+signal update_position
 
 var uuid: String = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 var _connected: bool = false
@@ -50,7 +51,7 @@ func _on_data_received() -> void:
             
 
 func _handle_incoming_data(data: Dictionary) -> void:
-    printt("_handle_incoming_data", data)
+#    printt("_handle_incoming_data", data)
     match data.cmd:
         "joined_server":
             printt(data.content.msg, data.content.uuid)
@@ -62,6 +63,8 @@ func _handle_incoming_data(data: Dictionary) -> void:
             emit_signal("spawn_new_player", data.content.player)
         "spawn_network_players":
             emit_signal("spawn_network_players", data.content.players)
+        "update_position":
+            emit_signal("update_position", data.content)
         _:
             push_error("_handle_incoming_data ERROR!!")
 
@@ -73,3 +76,7 @@ func connect_to_server() -> void:
         push_error("Could not connect! Error: %s" % error)
         return
     _connected = true
+
+
+func send(cmd: String, content: Dictionary) -> void:
+    _client.get_peer(1).put_var({ "cmd": cmd, "content": content })

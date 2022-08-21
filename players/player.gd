@@ -13,9 +13,14 @@ var _input_dir: Vector2 = Vector2.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready():
     pass
+    
+    
+func _process(_delta) -> void:
+    if _input_dir != Vector2.ZERO:
+        Client.send("position", { "x": position.x, "y": position.y })
 
 
-func _physics_process(delta) -> void:
+func _physics_process(_delta) -> void:
     _input_dir.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
     
     if _input_dir.length() != 0:
