@@ -52,8 +52,7 @@ margin_top = -28.5
 margin_right = 168.5
 margin_bottom = 28.5
 custom_fonts/font = SubResource( 1 )
-text = "Joining server...
-"
+text = "Joining server.."
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Transition"]
 anims/transit = SubResource( 2 )

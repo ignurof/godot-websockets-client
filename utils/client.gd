@@ -6,6 +6,7 @@ signal spawn_local_player
 signal spawn_new_player
 signal spawn_network_players
 signal update_position
+signal new_chat_message
 
 var uuid: String = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 var _connected: bool = false
@@ -65,6 +66,8 @@ func _handle_incoming_data(data: Dictionary) -> void:
             emit_signal("spawn_network_players", data.content.players)
         "update_position":
             emit_signal("update_position", data.content)
+        "new_chat_message":
+            emit_signal("new_chat_message", data.content)
         _:
             push_error("_handle_incoming_data ERROR!!")
 

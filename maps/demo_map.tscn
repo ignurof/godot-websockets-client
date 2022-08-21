@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://maps/demo_map.gd" type="Script" id=2]
+[ext_resource path="res://maps/chat.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
+
+[sub_resource type="StyleBoxFlat" id=2]
 
 [node name="DemoMap" type="Node2D"]
 script = ExtResource( 2 )
@@ -43,3 +46,43 @@ shape = SubResource( 1 )
 position = Vector2( 620, 300 )
 
 [node name="PlayerList" type="Node2D" parent="."]
+
+[node name="DummyControl" type="Control" parent="."]
+margin_right = 1341.0
+margin_bottom = 775.0
+
+[node name="Chat" type="Control" parent="."]
+margin_right = 384.0
+margin_bottom = 233.0
+script = ExtResource( 3 )
+
+[node name="LineEdit" type="LineEdit" parent="Chat"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -24.0
+max_length = 140
+expand_to_text_length = true
+placeholder_text = "Input your text message here"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Chat"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -24.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Chat/ScrollContainer"]
+margin_right = 384.0
+margin_bottom = 209.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_colors/selection_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 2 )
+text = "Ignurof: This is a chat message placeholder text...
+----------------------------------------------------------------------------
+"
+
+[connection signal="gui_input" from="DummyControl" to="Chat" method="_on_DummyControl_gui_input"]
+[connection signal="text_entered" from="Chat/LineEdit" to="Chat" method="_on_LineEdit_text_entered"]
