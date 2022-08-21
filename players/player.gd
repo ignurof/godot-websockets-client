@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-const MAX_SPEED: float = 45.0
+const MAX_SPEED: float = 200.0
 const GRAVITY: float = 9.8
-const ACCELERATION: float = 400.0
-const FRICTION: float = 500.0
+const ACCELERATION: float = 500.0
+const FRICTION: float = 300.0
 const MASS: float = 45.0
 
 var velocity: Vector2 = Vector2.ZERO
